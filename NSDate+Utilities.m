@@ -19,14 +19,10 @@ static const unsigned componentFlags = (NSCalendarUnitYear| NSCalendarUnitMonth 
 
 @implementation NSDate (Utilities)
 
-// Courtesy of Lukasz Margielewski
-// Updated via Holger Haenisch
+// resolve iOS7/8 crash issues http://stackoverflow.com/questions/24624137/ios-nscalendar-crash-references-issue
 + (NSCalendar *) currentCalendar
 {
-    static NSCalendar *sharedCalendar = nil;
-    if (!sharedCalendar)
-        sharedCalendar = [NSCalendar autoupdatingCurrentCalendar];
-    return sharedCalendar;
+	return [NSCalendar autoupdatingCurrentCalendar];
 }
 
 #pragma mark - Relative Dates
