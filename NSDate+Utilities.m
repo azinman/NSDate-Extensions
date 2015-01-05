@@ -166,6 +166,24 @@ static const unsigned componentFlags = (NSCalendarUnitYear| NSCalendarUnitMonth 
 	return [self isEqualToDateIgnoringTime:[NSDate dateYesterday]];
 }
 
+- (BOOL) isMorning {
+  NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitHour fromDate:self];
+  NSInteger hour = [components hour];
+  return (hour >= 6 && hour < 12);
+}
+
+- (BOOL) isAfternoon {
+  NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitHour fromDate:self];
+  NSInteger hour = [components hour];
+  return (hour >= 12 && hour < 20);
+}
+
+- (BOOL) isTonight {
+  NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitHour fromDate:self];
+  NSInteger hour = [components hour];
+  return (hour >= 20 || hour < 6);
+}
+
 // This hard codes the assumption that a week is 7 days
 - (BOOL) isSameWeekAsDate: (NSDate *) aDate
 {
